@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<body>
+<div class="container">
+    <th:block th:insert="commons/menu::menu"></th:block>
+    <div th:if="${info != null && !info.isEmpty()}" th:text="${info}"></div>
+
+</div>
+<th:block th:insert="commons/include_js::js_fragment"></th:block>
+</body>
+</html>

@@ -1,0 +1,9 @@
+#cloud:
+#  aws:
+#    credentials:
+#      instanceProfile: false
+#      useDefaultAwsCredentialsChain: false
+#      profileName: default
+#      profilePath: ${user.home}/.aws/credentials
+#  stack:
+#    auto: false

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{../../webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<body>
+<div class="container">
+    <th:block th:insert="commons/menu::menu"></th:block>
+    <div class="card border-light mb-3">
+        <div class="card-header">Instance Details</div>
+    </div>
+    <!--/*@thymesVar id="instance" type="com.example.awsdemo.models.Instance"*/-->
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>Instance Id</th>
+            <th>Instance State Code</th>
+            <th>Instance State Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${instance.instanceId}"></td>
+            <td th:text="${instance.state.code}"></td>
+            <td th:text="${instance.state.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--/*@thymesVar id="blockDeviceMapping" type="com.example.awsdemo.models.InstanceBlockDeviceMapping"*/-->
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th colspan="5">Block Device Mappings</th>
+            </tr>
+            <tr>
+                <th>Device Name</th>
+                <th>Volume Id</th>
+                <th>Attach Time</th>
+                <th>Delete On Termination</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="blockDeviceMapping : ${instance.blockDeviceMappings}">
+                <td th:text="${blockDeviceMapping.deviceName}"></td>
+                <td th:text="${blockDeviceMapping.ebs.volumeId}"></td>
+                <td th:text="${blockDeviceMapping.ebs.attachTime}"></td>
+                <td th:text="${blockDeviceMapping.ebs.deleteOnTermination}"></td>
+                <td th:text="${blockDeviceMapping.ebs.status}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!--/*@thymesVar id="securityGroup" type="com.example.awsdemo.models.GroupIdentifier"*/-->
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th colspan="2">Security Groups</th>
+            </tr>
+            <tr>
+                <th>Group Id</th>
+                <th>Group Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="securityGroup : ${instance.securityGroups}">
+                <td th:text="${securityGroup.groupId}"></td>
+                <td th:text="${securityGroup.groupName}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--/*@thymesVar id="tag" type="com.example.awsdemo.models.Tag"*/-->
+    <table th:if= "${!instance.tags.isEmpty()}" class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2">Tags</th>
+        </tr>
+        <tr>
+            <th>Tag Key</th>
+            <th>Tag Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tag : ${instance.tags}">
+            <td th:text="${tag.key}"></td>
+            <td th:text="${tag.value}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2">Details</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr><td>amiLaunchIndex</td><td th:text="${instance.amiLaunchIndex}"></td></tr>
+            <tr><td>imageId</td><td th:text="${instance.imageId}"></td></tr>
+            <tr><td>instanceType</td><td th:text="${instance.instanceType}"></td></tr>
+            <tr><td>kernelId</td><td th:text="${instance.kernelId}"></td></tr>
+            <tr><td>keyName</td><td th:text="${instance.keyName}"></td></tr>
+            <tr><td>launchTime</td><td th:text="${instance.launchTime}"></td></tr>
+            <tr><td>platform</td><td th:text="${instance.platform}"></td></tr>
+            <tr><td>privateDnsName</td><td th:text="${instance.privateDnsName}"></td></tr>
+            <tr><td>privateIpAddress</td><td th:text="${instance.privateIpAddress}"></td></tr>
+            <tr><td>publicDnsName</td><td th:text="${instance.publicDnsName}"></td></tr>
+            <tr><td>publicIpAddress</td><td th:text="${instance.publicIpAddress}"></td></tr>
+            <tr><td>ramdiskId</td><td th:text="${instance.ramdiskId}"></td></tr>
+            <tr><td>publicIpAddress</td><td th:text="${instance.publicIpAddress}"></td></tr>
+            <tr><td>stateTransitionReason</td><td th:text="${instance.stateTransitionReason}"></td></tr>
+            <tr><td>subnetId</td><td th:text="${instance.subnetId}"></td></tr>
+            <tr><td>vpcId</td><td th:text="${instance.vpcId}"></td></tr>
+            <tr><td>architecture</td><td th:text="${instance.architecture}"></td></tr>
+            <tr><td>clientToken</td><td th:text="${instance.clientToken}"></td></tr>
+            <tr><td>ebsOptimized</td><td th:text="${instance.ebsOptimized}"></td></tr>
+            <tr><td>enaSupport</td><td th:text="${instance.enaSupport}"></td></tr>
+            <tr><td>hypervisor</td><td th:text="${instance.hypervisor}"></td></tr>
+            <tr><td>instanceLifecycle</td><td th:text="${instance.instanceLifecycle}"></td></tr>
+            <tr><td>rootDeviceName</td><td th:text="${instance.rootDeviceName}"></td></tr>
+            <tr><td>rootDeviceType</td><td th:text="${instance.rootDeviceType}"></td></tr>
+            <tr><td>sourceDestCheck</td><td th:text="${instance.sourceDestCheck}"></td></tr>
+            <tr><td>spotInstanceRequestId</td><td th:text="${instance.spotInstanceRequestId}"></td></tr>
+            <tr><td>clientToken</td><td th:text="${instance.clientToken}"></td></tr>
+            <tr><td>sriovNetSupport</td><td th:text="${instance.sriovNetSupport}"></td></tr>
+            <tr><td>virtualizationType</td><td th:text="${instance.virtualizationType}"></td></tr>
+        </tbody>
+    </table>
+
+</div>
+<th:block th:insert="commons/include_js::js_fragment"></th:block>
+</body>
+</html>
+
+

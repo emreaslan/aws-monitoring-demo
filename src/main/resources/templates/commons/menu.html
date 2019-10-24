@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu">
+    <div class="card border-light mb-3">
+        <div class="card-header">
+            <a th:href="@{'/awsCollectAll'}" class="btn btn-outline-primary btn-sm">Retrieve Data from AWS</a>
+            <a th:href="@{'/instance'}" class="btn btn-outline-primary btn-sm">Instances</a>
+            <a th:href="@{'/volume'}" class="btn btn-outline-primary btn-sm">Volumes</a>
+            <a th:href="@{'/sg'}" class="btn btn-outline-primary btn-sm">Security Groups</a>
+        </div>
+    </div>
+</div>
+</html>

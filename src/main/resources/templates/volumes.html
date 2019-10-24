@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<body>
+<div th:with="haveInstances = ${volumeList != null && !volumeList.isEmpty()}" class="container">
+    <th:block th:insert="commons/menu::menu"></th:block>
+    <div class="card border-light mb-3">
+        <div class="card-header">Volumes</div>
+        <div class="card-body">
+            <h5 class="card-title">List of Volumes</h5>
+            <p th:if="${haveInstances}" class="card-text">All volumes are listed below.</p>
+            <p th:unless="${haveInstances}" class="card-text">There is no instances, you can retrieve from AWS using the menu above.</p>
+        </div>
+    </div>
+    <div th:if="${haveInstances}" class="card border-light">
+        <div class="card-block">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Volume Attachments</th>
+                    <th>Tags</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <!--/*@thymesVar id="volumeList" type="java.util.List"*/-->
+                <!--/*@thymesVar id="volume" type="com.example.awsdemo.models.Volume"*/-->
+                <tbody>
+                <tr th:each="volume : ${volumeList}">
+                    <td th:text="${volume.volumeId}"></td>
+                    <!--/*@thymesVar id="va" type="com.example.awsdemo.models.VolumeAttachment"*/-->
+                    <td>
+                        <table th:if= "${!volume.attachments.isEmpty()}" th:border="1" style="font-size:12px;">
+                            <thead>
+                            <tr>
+                                <th colspan="3">Volume Attachments</th>
+                            </tr>
+                            <tr>
+                                <th>State</th>
+                                <th>Delete On Termination</th>
+                                <th>Attach Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="va : ${volume.attachments}">
+                                <td th:text="${va.state}"></td>
+                                <td th:text="${va.deleteOnTermination}"></td>
+                                <td th:text="${va.attachTime}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+                    <!--/*@thymesVar id="tag" type="com.example.awsdemo.models.Tag"*/-->
+                    <td>
+                        <table th:if= "${!volume.tags.isEmpty()}" th:border="1" style="font-size:12px;">
+                            <thead>
+                            <tr>
+                                <th colspan="2">Tags</th>
+                            </tr>
+                            <tr>
+                                <th>Tag Key</th>
+                                <th>Tag Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="tag : ${volume.tags}">
+                                <td th:text="${tag.key}"></td>
+                                <td th:text="${tag.value}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <table th:border="1" style="font-size:12px;">
+                            <tbody>
+                                <tr><td>availabilityZone</td><td th:text="${volume.availabilityZone}"></td></tr>
+                                <tr><td>createTime</td><td th:text="${volume.createTime}"></td></tr>
+                                <tr><td>encrypted</td><td th:text="${volume.encrypted}"></td></tr>
+                                <tr><td>kmsKeyId</td><td th:text="${volume.kmsKeyId}"></td></tr>
+                                <tr><td>size</td><td th:text="${volume.size}"></td></tr>
+                                <tr><td>snapshotId</td><td th:text="${volume.snapshotId}"></td></tr>
+                                <tr><td>state</td><td th:text="${volume.state}"></td></tr>
+                                <tr><td>iops</td><td th:text="${volume.iops}"></td></tr>
+                                <tr><td>volumeType</td><td th:text="${volume.volumeType}"></td></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<th:block th:insert="commons/include_js::js_fragment"></th:block>
+</body>
+</html>
+
