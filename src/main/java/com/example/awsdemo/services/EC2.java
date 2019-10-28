@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("aws.properties")
+@PropertySource("classpath:aws.properties")
 public class EC2 {
     @Value("${cloud.aws.credentials.access-key}")
     private String key;

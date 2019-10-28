@@ -3,8 +3,8 @@ package com.example.awsdemo.services;
 import com.example.awsdemo.models.Instance;
 import com.example.awsdemo.repositories.InstanceRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

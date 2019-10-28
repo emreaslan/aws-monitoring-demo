@@ -5,13 +5,14 @@ import com.amazonaws.services.ec2.model.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DataCollectionService {
-    private final AmazonEC2 amazonEC2;
+    private AmazonEC2 amazonEC2;
     private VolumeService volumeService;
     private SecurityGroupService securityGroupService;
     private InstanceService instanceService;
@@ -69,6 +70,7 @@ public class DataCollectionService {
         this.instanceService = instanceService;
     }
 
+    @Transactional
     public void getVolumes() {
         boolean done = false;
 
@@ -88,6 +90,7 @@ public class DataCollectionService {
         }
     }
 
+    @Transactional
     public void getSecurityGroups() {
         boolean done = false;
         DescribeSecurityGroupsRequest request = new DescribeSecurityGroupsRequest();
@@ -106,6 +109,7 @@ public class DataCollectionService {
         }
     }
 
+    @Transactional
     public void getInstances() {
         boolean done = false;
         DescribeInstancesRequest request = new DescribeInstancesRequest();

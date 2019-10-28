@@ -3,6 +3,7 @@ package com.example.awsdemo.services;
 import com.example.awsdemo.models.Volume;
 import com.example.awsdemo.repositories.VolumeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class VolumeServiceImpl implements VolumeService {
         return volumeRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public void save(Volume instance) {
         volumeRepository.save(instance);

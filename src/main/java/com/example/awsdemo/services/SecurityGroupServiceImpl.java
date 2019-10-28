@@ -3,6 +3,7 @@ package com.example.awsdemo.services;
 import com.example.awsdemo.models.SecurityGroup;
 import com.example.awsdemo.repositories.SecurityGroupRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class SecurityGroupServiceImpl implements SecurityGroupService {
         return repository.findById(id);
     }
 
+    @Transactional
     @Override
     public void save(SecurityGroup instance) {
         repository.save(instance);
